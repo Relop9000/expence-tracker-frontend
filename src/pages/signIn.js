@@ -1,7 +1,38 @@
 import Logo from "../../public/icons/Logo";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useState } from "react";
+import axios from "axios";
+import { toast } from "sonner";
 
 const SignIn = () => {
+  const [userEmail, setUserEmail] = useState("");
+  const [userPassword, setUserPassword] = useState("");
+  const router = useRouter();
+
+  const handleLogin = async () => {
+    await axios
+      .post("http://localhost:8000/user/signin", {
+        userEmail: userEmail,
+        userPassword: userPassword,
+      })
+      .then(function (response) {
+        if (response.data.user.length === 1) {
+          console.log(response.data.user[0].id);
+          router.push;
+          ("/");
+        } else {
+          toast.error("unsuccessful");
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+        toast.error;
+        ("unsuccessful");
+      })
+      .finally(function () {});
+  };
+
   return (
     <div className="flex w-screen h-screen">
       <div className="w-3/5 bg-[#FFFFFF] flex  justify-center items-center">
@@ -22,13 +53,17 @@ const SignIn = () => {
             <input
               className="px-4 py-3 w-full rounded-lg bg-[#F3F4F6] border border-[#D1D5DB]"
               placeholder="Email"
+              value={userEmail}
+              onChange={(e) => setUserEmail(e.target.value)}
             />
             <input
               className="px-4 py-3 w-full rounded-lg bg-[#F3F4F6] border border-[#D1D5DB]"
               placeholder="Password"
+              value={userPassword}
+              onChange={(e) => setUserPassword(e.target.value)}
             />
             <button
-              onClick={() => Login()}
+              onClick={handleLogin}
               className="bg-[#0166FF] justify-center font-normal text-xl flex items-center text-white text-center py-2.5 w-full rounded-3xl"
             >
               Log in

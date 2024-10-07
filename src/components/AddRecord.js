@@ -1,11 +1,6 @@
 import { IoClose } from "react-icons/io5";
 import { useState } from "react";
-import Drink from "../../public/icons/Drink";
-import Gift from "../../public/icons/Gift";
-import Shopping from "../../public/icons/Shopping";
-import Taxi from "../../public/icons/Taxi";
-import RentIcon from "../../public/icons/RentIcon";
-import FoodExpense from "../../public/icons/FoodExpenseIcon";
+import axios from "axios";
 
 const AddRecord = (props) => {
   const { onCloseModal } = props;
@@ -21,7 +16,9 @@ const AddRecord = (props) => {
     }
   };
 
-  const handleAdd = () => {};
+  const handleAdd = () => {
+    return console.log();
+  };
 
   const Expensebackground = incomeExpense === "Expense" ? "#0166FF" : "#F3F4F6";
   const Incomebackground = incomeExpense === "Income" ? "#16A34A" : "#F3F4F6";
